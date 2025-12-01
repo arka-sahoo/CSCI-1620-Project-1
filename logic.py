@@ -1,1 +1,12 @@
-print("This is the logic file")
+from PyQt6.QtWidgets import *
+from gui import *
+
+class Logic(QMainWindow, Ui_MainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+
+        self.pushButton.clicked.connect(lambda : self.submit())
+
+    def submit(self):
+        name = self.input_id.text()
