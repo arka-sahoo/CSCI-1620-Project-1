@@ -9,4 +9,8 @@ class Logic(QMainWindow, Ui_MainWindow):
         self.pushButton.clicked.connect(lambda : self.submit())
 
     def submit(self):
-        name = self.input_id.text()
+        csvfile="votes.csv"
+        with open(csvfile, 'a', newline='') as file:
+            file.write('Voter  Candidate  Total\n')
+            name = self.input_id.text()
+
