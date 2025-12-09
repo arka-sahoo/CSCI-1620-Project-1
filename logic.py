@@ -51,7 +51,3 @@ class Logic(QMainWindow, Ui_MainWindow):
             else:
                 self.label_message.setStyleSheet("color: red;")
                 self.label_message.setText('Invalid ID. Please enter your correct ID.')
-
-        self.input_id.clear()
-        self.radioButton_jane.setChecked(False)
-        self.radioButton_john.setChecked(False)
