@@ -1,3 +1,4 @@
+import csv
 from PyQt6.QtWidgets import *
 from gui import *
 
@@ -11,6 +12,7 @@ class Logic(QMainWindow, Ui_MainWindow):
     def submit(self):
         jane_total = 0
         john_total = 0
+        already_voted = False
         csvfile="votes.csv"
         with open(csvfile, 'a', newline='') as file:
             file.write('Voter           Candidate           Total\n')
@@ -26,11 +28,17 @@ class Logic(QMainWindow, Ui_MainWindow):
                     if (number >= 10000) and (number <= 99999):
                         self.label_message.setStyleSheet("color: black;")
                         self.label_message.setText('ID is valid. Please vote any one candidate.')
-                        if self.radioButton_jane.isChecked():
+                        with open('votes.csv', 'r') as f:
+                            csv_reader = csv.reader(f)
+                            for row in csv_reader:
+                                if row and str(number) in row[0]:
+                                    already_voted = True
+                                    self.label_message.setText(f'Already voted')
+                        if self.radioButton_jane.isChecked() and already_voted == False:
                             jane_total += 1
                             self.label_message.setText(f'Voted Jane, Total - {jane_total}')
                             file.write(f'Voter - {number}  Candidate - Jane  Total - {jane_total}\n')
-                        elif self.radioButton_john.isChecked():
+                        elif self.radioButton_john.isChecked() and already_voted == False:
                             john_total += 1
                             self.label_message.setText(f'Voted John, Total - {john_total}')
                             file.write(f'Voter - {number}  Candidate - John  Total - {john_total}\n')
@@ -43,3 +51,7 @@ class Logic(QMainWindow, Ui_MainWindow):
             else:
                 self.label_message.setStyleSheet("color: red;")
                 self.label_message.setText('Invalid ID. Please enter your correct ID.')
+
+        self.input_id.clear()
+        self.radioButton_jane.setChecked(False)
+        self.radioButton_john.setChecked(False)
