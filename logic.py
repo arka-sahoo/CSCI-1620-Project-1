@@ -3,21 +3,40 @@ from PyQt6.QtWidgets import *
 from gui import *
 
 class Logic(QMainWindow, Ui_MainWindow):
+    """
+    This class handles Logic and interacts with the PyQt6 application.
+    It inherits from QMainWindow to help getting the main window structure.
+    It also helps in accessing the GUI elements which are defined in the gui.py file.
+    """
+
+
     def __init__(self):
+        """
+        This method initializes the application window.
+        This method sets up the UI.
+        """
         super().__init__()
         self.setupUi(self)
 
         self.pushButton.clicked.connect(lambda : self.submit())
 
-    def submit(self):
-        jane_total = 0
-        john_total = 0
-        already_voted = False
-        csvfile="votes.csv"
-        with open(csvfile, 'a', newline='') as file:
+        self.jane_total = 0
+        self.john_total = 0
+
+        my_file = 'votes.csv'
+        with open(my_file, 'w') as file:
             file.write('Voter           Candidate           Total\n')
-            name = self.input_id.text().strip()
-            is_number = False
+
+
+    def submit(self):
+        """
+        This method retrieves the user input, performs validation checks, and then processes the data.
+        """
+        csvfile = "votes.csv"
+        already_voted = False
+        name = self.input_id.text().strip()
+        is_number = False
+        with open(csvfile, 'a', newline='') as file:
             try:
                 number = int(name)
                 is_number = True
@@ -33,15 +52,16 @@ class Logic(QMainWindow, Ui_MainWindow):
                             for row in csv_reader:
                                 if row and str(number) in row[0]:
                                     already_voted = True
+                                    self.label_message.setStyleSheet("color: red;")
                                     self.label_message.setText(f'Already voted')
                         if self.radioButton_jane.isChecked() and already_voted == False:
-                            jane_total += 1
-                            self.label_message.setText(f'Voted Jane, Total - {jane_total}')
-                            file.write(f'Voter - {number}  Candidate - Jane  Total - {jane_total}\n')
+                            self.jane_total += 1
+                            self.label_message.setText(f'Voted Jane')
+                            file.write(f'Voter - {number}  Candidate - Jane  Total - {self.jane_total}\n')
                         elif self.radioButton_john.isChecked() and already_voted == False:
-                            john_total += 1
-                            self.label_message.setText(f'Voted John, Total - {john_total}')
-                            file.write(f'Voter - {number}  Candidate - John  Total - {john_total}\n')
+                            self.john_total += 1
+                            self.label_message.setText(f'Voted John')
+                            file.write(f'Voter - {number}  Candidate - John  Total - {self.john_total}\n')
                     else:
                         self.label_message.setStyleSheet("color: red;")
                         self.label_message.setText('Invalid ID. Please enter your correct ID.')
