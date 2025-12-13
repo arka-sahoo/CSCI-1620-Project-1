@@ -18,7 +18,7 @@ class Logic(QMainWindow, Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
 
-        self.pushButton.clicked.connect(lambda : self.submit())
+        self.pushButton.clicked.connect(lambda : self.submit()) # Push button is connected to submit method
 
         self.jane_total = 0 # Variable for calculating Jane's total number of votes
         self.john_total = 0 # Variable for calculating John's total number of votes
@@ -52,7 +52,7 @@ class Logic(QMainWindow, Ui_MainWindow):
                             for row in csv_reader:
                                 if row and str(number) in row[0]:
                                     already_voted = True
-                                    self.label_message.setStyleSheet("color: red;") # Setting the text color to red for error messages
+                                    self.label_message.setStyleSheet("color: red;")
                                     self.label_message.setText(f'Already voted')
                         if self.radioButton_jane.isChecked() and already_voted == False:
                             self.jane_total += 1 # Jane's total increases by 1
@@ -63,11 +63,11 @@ class Logic(QMainWindow, Ui_MainWindow):
                             self.label_message.setText(f'Voted John')
                             file.write(f'Voter - {number}  Candidate - John  Total - {self.john_total}\n')
                     else:
-                        self.label_message.setStyleSheet("color: red;") # Setting the text color to red for error messages
+                        self.label_message.setStyleSheet("color: red;")
                         self.label_message.setText('Invalid ID. Please enter your correct ID.')
                 except NameError:
-                    self.label_message.setStyleSheet("color: red;") # Setting the text color to red for error messages
+                    self.label_message.setStyleSheet("color: red;")
                     self.label_message.setText('Invalid ID. Please enter your correct ID.')
             else:
-                self.label_message.setStyleSheet("color: red;") # Setting the text color to red for error messages
+                self.label_message.setStyleSheet("color: red;")
                 self.label_message.setText('Invalid ID. Please enter your correct ID.')
