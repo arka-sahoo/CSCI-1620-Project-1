@@ -1,6 +1,9 @@
 from logic import *
 
-def main():
+def main() -> None:
+    """
+    The main function for the PyQt6 application.
+    """
     application = QApplication([])
     window = Logic()
     window.show()
