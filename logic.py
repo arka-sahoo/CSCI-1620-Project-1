@@ -9,7 +9,6 @@ class Logic(QMainWindow, Ui_MainWindow):
     It also helps in accessing the GUI elements which are defined in the gui.py file.
     """
 
-
     def __init__(self) -> None:
         """
         This method initializes the application window.
@@ -26,7 +25,6 @@ class Logic(QMainWindow, Ui_MainWindow):
         my_file = 'votes.csv'
         with open(my_file, 'w') as file:
             file.write('Voter           Candidate           Total\n') # Writing the header.
-
 
     def submit(self) -> None:
         """
