@@ -10,7 +10,7 @@ class Logic(QMainWindow, Ui_MainWindow):
     """
 
 
-    def __init__(self):
+    def __init__(self) -> None:
         """
         This method initializes the application window.
         This method sets up the UI.
@@ -28,7 +28,7 @@ class Logic(QMainWindow, Ui_MainWindow):
             file.write('Voter           Candidate           Total\n') # Writing the header.
 
 
-    def submit(self):
+    def submit(self) -> None:
         """
         This method retrieves the user input, performs validation checks, and then processes the data.
         """
