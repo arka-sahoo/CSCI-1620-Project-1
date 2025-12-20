@@ -13,6 +13,8 @@ class Logic(QMainWindow, Ui_MainWindow):
         """
         This method initializes the application window.
         This method sets up the UI.
+        :param: No parameters other than 'self', 'self' is the only argument.
+        :return: Returns none.
         """
         super().__init__()
         self.setupUi(self)
@@ -29,6 +31,8 @@ class Logic(QMainWindow, Ui_MainWindow):
     def submit(self) -> None:
         """
         This method retrieves the user input, performs validation checks, and then processes the data.
+        :param: No parameters other than 'self', 'self' is the only argument.
+        :return: Returns none.
         """
         csvfile = "votes.csv"
         already_voted = False # A boolean variable whose initial value is False
