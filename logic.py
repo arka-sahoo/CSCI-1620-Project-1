@@ -59,10 +59,12 @@ class Logic(QMainWindow, Ui_MainWindow):
                         if self.radioButton_jane.isChecked() and already_voted == False:
                             self.jane_total += 1 # Jane's total increases by 1
                             self.label_message.setText(f'Voted Jane, Total - {self.jane_total}')
+                            self.input_id.clear() # Clears the data from the input box
                             file.write(f'Voter - {number}  Candidate - Jane  Total - {self.jane_total}\n')
                         elif self.radioButton_john.isChecked() and already_voted == False:
                             self.john_total += 1 # John's total increases by 1
                             self.label_message.setText(f'Voted John, Total - {self.john_total}')
+                            self.input_id.clear() # Clears the data from the input box
                             file.write(f'Voter - {number}  Candidate - John  Total - {self.john_total}\n')
                     else:
                         self.label_message.setStyleSheet("color: red;")
